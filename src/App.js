@@ -1,19 +1,23 @@
 import React from 'react';
-import Header from './components/Header';
-import ProductList from './components/ProductList';
-import ShoppingCart from './components/ShoppingCart';
+import Header from './components/common/Header';
+import ProductList from './components/products/ProductList';
+import ShoppingCart from './components/cart/ShoppingCart';
 
 const App = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-100 flex flex-col">
       <Header />
-      <main>
+      <main className="flex-1">
         <ProductList />
-        <div className="border-t-2 border-gray-200 mt-8"></div>
-        <ShoppingCart />
       </main>
-      <footer className="bg-gray-800 text-white text-center p-4 mt-12">
-        <p>&copy; 2025 Mi Tienda Online. Todos los derechos reservados.</p>
+      <ShoppingCart />
+      <footer className="bg-gray-800 text-white text-center p-6 mt-auto">
+        <p className="mb-2">
+          &copy; 2025 Redux Toolkit Store. Desarrollado con React & Redux Toolkit
+        </p>
+        <p className="text-sm text-gray-400">
+          Datos proporcionados por FakeStore API
+        </p>
       </footer>
     </div>
   );
