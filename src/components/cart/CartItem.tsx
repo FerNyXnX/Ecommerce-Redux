@@ -15,7 +15,7 @@ const CartItem: FC<CartItemProps> = memo(({ item }) => {
   };
   
   const handleQuantityChange = (newQuantity: number): void => {
-    dispatch(updateQuantity({ productId: item.id, quantity: newQuantity }));
+    dispatch(updateQuantity({ id: item.id, quantity: newQuantity })); // ✅ Cambiar productId por id
   };
   
   const handleIncrement = (): void => {
