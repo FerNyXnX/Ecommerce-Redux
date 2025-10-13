@@ -1,9 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { Product, ProductsState, LoadingStatus } from '../../types'; // Sin @types
+import { Product, ProductsState, LoadingStatus } from '../../types';
 import ProductsAPI from '../../services/api';
 import type { RootState } from '../../app/store';
 
-// AsyncThunks - SIN argumentos, por eso usamos void
 export const fetchProducts = createAsyncThunk<Product[]>(
   'products/fetchProducts',
   async () => {
@@ -20,8 +19,16 @@ export const fetchCategories = createAsyncThunk<string[]>(
 
 export const fetchProductById = createAsyncThunk<Product, number>(
   'products/fetchProductById',
-  async (productId) => {
-    return await ProductsAPI.fetchProductById(productId);
+  async (productId, { rejectWithValue }) => {
+    try {
+      const product = await ProductsAPI.fetchProductById(productId);
+      if (!product) {
+        return rejectWithValue('Producto no encontrado');
+      }
+      return product;
+    } catch (error) {
+      return rejectWithValue(error instanceof Error ? error.message : 'Error desconocido');
+    }
   }
 );
 
@@ -51,7 +58,6 @@ const productsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // fetchProducts cases
       .addCase(fetchProducts.pending, (state) => {
         state.status = LoadingStatus.Loading;
         state.error = null;
@@ -64,7 +70,6 @@ const productsSlice = createSlice({
         state.status = LoadingStatus.Failed;
         state.error = action.error.message || 'Error al cargar productos';
       })
-      // fetchCategories cases
       .addCase(fetchCategories.pending, (state) => {
         state.error = null;
       })
@@ -74,7 +79,6 @@ const productsSlice = createSlice({
       .addCase(fetchCategories.rejected, (state, action) => {
         state.error = action.error.message || 'Error al cargar categorías';
       })
-      // fetchProductById cases
       .addCase(fetchProductById.pending, (state) => {
         state.currentProduct = null;
       })
@@ -89,7 +93,6 @@ const productsSlice = createSlice({
 
 export const { setSelectedCategory, clearError, clearCurrentProduct } = productsSlice.actions;
 
-// Selectors
 export const selectAllProducts = (state: RootState): Product[] => state.products.items;
 export const selectProductsByCategory = (state: RootState): Product[] => {
   const { items, selectedCategory } = state.products;
