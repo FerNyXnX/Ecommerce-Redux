@@ -41,51 +41,36 @@ Aplicación de comercio electrónico desarrollada con React, Redux Toolkit y Typ
 - **ESLint** - Linting de código
 
 ## 📁 Estructura del Proyecto
-ecommerce-app/
-├── src/
-│   ├── tests/           # Utilidades de testing
-│   │   └── utils.tsx        # renderWithProviders helper
-│   ├── mocks/           # Mocks para testing
-│   │   └── api.ts           # Mock de ProductsAPI
-│   ├── app/                 # Configuración de Redux
-│   │   ├── hooks.ts         # Custom hooks (useAppDispatch, useAppSelector)
-│   │   └── store.ts         # Configuración del store
-│   ├── components/
-│   │   ├── cart/
-│   │   │   ├── CartItem.tsx
-│   │   │   ├── CartItem.test.tsx
-│   │   │   ├── ShoppingCart.tsx
-│   │   │   └── ShoppingCart.test.tsx
-│   │   ├── common/
-│   │   │   ├── Header.tsx
-│   │   │   ├── Header.test.tsx
-│   │   │   ├── Loading.tsx
-│   │   │   ├── Loading.test.tsx
-│   │   │   ├── Rating.tsx
-│   │   │   └── Rating.test.tsx
-│   │   └── products/
-│   │       ├── CategoryFilter.tsx
-│   │       ├── CategoryFilter.test.tsx
-│   │       ├── ProductCard.tsx
-│   │       ├── ProductCard.test.tsx
-│   │       ├── ProductList.tsx
-│   │       └── ProductList.test.tsx
-│   ├── features/
-│   │   ├── cart/
-│   │   │   ├── cartSlice.ts
-│   │   │   └── cartSlice.test.ts
-│   │   └── products/
-│   │       ├── productsSlice.ts
-│   │       └── productsSlice.test.ts
-│   ├── services/
-│   │   ├── api.ts
-│   │   └── api.test.ts
-│   ├── types/
-│   │   └── index.ts
-│   ├── App.tsx
-│   ├── App.test.tsx
-│   └── index.tsx
-├── jest.config.js           # Configuración de Jest
-├── jest.setup.js            # Setup global de Jest
-├── tsconfig.json            # Configuración de TypeScript
-└── package.json
+
+### Componentes
+
+| Ruta | Descripción |
+|------|-------------|
+| `src/components/cart/` | Componentes del carrito de compras |
+| `src/components/common/` | Componentes reutilizables (Header, Loading, Rating) |
+| `src/components/products/` | Componentes de productos y catálogo |
+
+### Redux
+
+| Ruta | Descripción |
+|------|-------------|
+| `src/app/store.ts` | Configuración del Redux store |
+| `src/features/cart/` | Slice del carrito (estado + acciones) |
+| `src/features/products/` | Slice de productos (estado + acciones) |
+
+### Tests
+
+| Tipo | Ubicación | Cantidad |
+|------|-----------|----------|
+| Componentes | `*.test.tsx` | 9 archivos |
+| Redux | `*.test.ts` | 3 archivos |
+| Servicios | `api.test.ts` | 1 archivo |
+| Utilidades | `__tests__/utils.tsx` | Helpers |
+
+### Configuración
+
+| Archivo | Propósito |
+|---------|-----------|
+| `jest.config.js` | Configuración de Jest |
+| `jest.setup.js` | Setup global de tests |
+| `tsconfig.json` | Configuración de TypeScript |
