@@ -1,4 +1,4 @@
-import { Product } from '../types';
+import { Product } from '../types'; // Sin @types
 
 class ProductsAPI {
   private static readonly BASE_URL = 'https://fakestoreapi.com';
