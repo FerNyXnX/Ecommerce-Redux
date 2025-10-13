@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect } from 'react'; // Sin React si no se usa
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import ProductCard from './ProductCard';
 import CategoryFilter from './CategoryFilter';
@@ -10,7 +10,7 @@ import {
   selectProductsStatus,
   selectProductsError
 } from '../../features/products/productsSlice';
-import { Product, LoadingStatus } from '../../types'; 
+import { Product, LoadingStatus } from '../../types';
 
 const ProductList: FC = () => {
   const dispatch = useAppDispatch();
@@ -20,13 +20,13 @@ const ProductList: FC = () => {
   
   useEffect(() => {
     if (status === LoadingStatus.Idle) {
-      dispatch(fetchProducts()); 
-      dispatch(fetchCategories()); 
+      dispatch(fetchProducts()); // Sin argumentos
+      dispatch(fetchCategories()); // Sin argumentos
     }
   }, [status, dispatch]);
   
   const handleRetry = (): void => {
-    dispatch(fetchProducts()); 
+    dispatch(fetchProducts()); // Sin argumentos
   };
   
   if (status === LoadingStatus.Loading) {
