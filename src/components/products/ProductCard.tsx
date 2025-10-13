@@ -1,6 +1,6 @@
 import { FC, memo } from 'react'; 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { addToCart, selectCartItemById } from '../../features/cart/cartSlice';
+import { addToCart } from '../../features/cart/cartSlice';
 import { Product } from '../../types'; 
 import Rating from '../common/Rating';
 
@@ -10,7 +10,9 @@ interface ProductCardProps {
 
 const ProductCard: FC<ProductCardProps> = memo(({ product }) => {
   const dispatch = useAppDispatch();
-  const cartItem = useAppSelector(selectCartItemById(product.id));
+  const cartItem = useAppSelector(state => 
+    state.cart.items.find(item => item.id === product.id)
+  );
   
   const handleAddToCart = (): void => {
     dispatch(addToCart(product));
